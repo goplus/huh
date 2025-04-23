@@ -1,0 +1,43 @@
+import "github.com/goplus/huh"
+
+type result struct {
+	Burger     string
+	Toppings   []string
+	SauceLevel int
+}
+
+ret := result{}
+
+form := huh`> &ret
+<form>
+	<group>
+		<select id="Burger" title="Choose your burger">
+			<option value="classic" title="Charmburger Classic"/>
+			<option value="chickwich" title="Chickwich"/>
+			<option value="fishburger" title="Fishburger"/>
+			<option value="charmpossible" title="Charmpossible™ Burger"/>
+		</select>
+
+		<multiselect id="Toppings" title="Toppings" limit=4>
+			<option value="Lettuce" selected/>
+			<option value="Tomatoes" selected/>
+			<option value="Jalapeños"/>
+			<option value="Cheese"/>
+			<option value="Vegan Cheese"/>
+			<option value="Nutella"/>
+		</multiselect>
+
+		<select id="SauceLevel" title="How much Charm Sauce do you want?">
+			<option value=0 title="None"/>
+			<option value=1 title="A little"/>
+			<option value=2 title="A lot"/>
+		</select>
+	</group>
+</form>
+`
+
+if err := form.run; err != nil {
+	echo err
+} else {
+	echo ret
+}
