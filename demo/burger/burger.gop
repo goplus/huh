@@ -34,7 +34,7 @@ form := huh`> &ret
 		</select>
 	</group>
 </form>
-`
+`!
 
 if err := form.run; err != nil {
 	echo err
