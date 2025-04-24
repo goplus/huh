@@ -52,7 +52,7 @@ func New(text string, ret any) (_ Form, err error) {
 			}
 			fields = append(fields, field)
 		}
-		huh.NewGroup(fields...)
+		groups = append(groups, huh.NewGroup(fields...))
 	}
 	return Form{huh.NewForm(groups...)}, nil
 }

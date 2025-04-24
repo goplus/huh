@@ -36,8 +36,12 @@ form := huh`> &ret
 </form>
 `!
 
-if err := form.run; err != nil {
+err := form.run
+if err != nil {
 	echo err
 } else {
-	echo ret
+	echo "Your order:"
+	echo "Burger:", ret.Burger
+	echo "Toppings:", ret.Toppings
+	echo "Charm Sauce:", ret.SauceLevel
 }

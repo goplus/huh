@@ -36,13 +36,19 @@ func main() {
 		return
 	}()
 //line demo/burger/burger.gop:39:1
-	if
-//line demo/burger/burger.gop:39:1
-	err := form.Run(); err != nil {
+	err := form.Run()
 //line demo/burger/burger.gop:40:1
+	if err != nil {
+//line demo/burger/burger.gop:41:1
 		fmt.Println(err)
 	} else {
-//line demo/burger/burger.gop:42:1
-		fmt.Println(ret)
+//line demo/burger/burger.gop:43:1
+		fmt.Println("Your order:")
+//line demo/burger/burger.gop:44:1
+		fmt.Println("Burger:", ret.Burger)
+//line demo/burger/burger.gop:45:1
+		fmt.Println("Toppings:", ret.Toppings)
+//line demo/burger/burger.gop:46:1
+		fmt.Println("Charm Sauce:", ret.SauceLevel)
 	}
 }
