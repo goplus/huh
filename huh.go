@@ -73,6 +73,21 @@ func newField(item node, ret any) (huh.Field, error) {
 			return nil, e
 		}
 		return ms, initMultiSelect(ms, item)
+	case *noteNode:
+		note := huh.NewNote()
+		if item.Title != "" {
+			note.Title(item.Title)
+		}
+		if item.Description != "" {
+			note.Description(item.Description)
+		}
+		if next := item.Next; next != "" {
+			note.Next(true)
+			if next != "next" {
+				note.NextLabel(next)
+			}
+		}
+		return note, nil
 	default:
 		return nil, errors.New("unknown node type")
 	}
