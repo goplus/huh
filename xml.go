@@ -28,6 +28,7 @@ const (
 	nodeInvalid nodeType = iota
 	nodeSelect
 	nodeMultiSelect
+	nodeNote
 )
 
 type node interface {
@@ -40,8 +41,14 @@ type formDoc struct {
 	Groups []*group `xml:"group"`
 }
 
-type group struct {
-	Items []node
+type noteNode struct {
+	Title       string `xml:"title,attr"`
+	Description string `xml:"description,attr"`
+	Next        string `xml:"next,attr"`
+}
+
+func (n *noteNode) Type() nodeType {
+	return nodeNote
 }
 
 type selectNode struct {
@@ -69,6 +76,10 @@ type optionNode struct {
 	Selected []byte `xml:"selected,attr"`
 }
 
+type group struct {
+	Items []node
+}
+
 func (g *group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 	for {
 		token, err := d.Token()
@@ -90,6 +101,12 @@ func (g *group) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 					return err
 				}
 				g.Items = append(g.Items, &ms)
+			case "note":
+				var n noteNode
+				if err := d.DecodeElement(&n, &se); err != nil {
+					return err
+				}
+				g.Items = append(g.Items, &n)
 			default:
 				return errors.New("unknown element " + se.Name.Local)
 			}

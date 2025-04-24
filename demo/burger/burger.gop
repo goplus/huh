@@ -6,10 +6,19 @@ type result struct {
 	SauceLevel int
 }
 
-ret := result{}
+ret := new(result)
 
-form := huh`> &ret
+form := huh`> ret
 <form>
+	<group>
+		<note
+			title="Charmburger"
+			description="Welcome to _Charmburger™_.
+
+How may we take your order?"
+			next/>
+	</group>
+
 	<group>
 		<select id="Burger" title="Choose your burger">
 			<option value="classic" title="Charmburger Classic"/>
